@@ -14,8 +14,6 @@ import {
   Sparkles,
   ShoppingBag,
   Info,
-  Menu,
-  X,
   Star,
   ShieldCheck
 } from 'lucide-react';
@@ -237,7 +235,6 @@ const PlanCard: React.FC<{ plan: PlanData }> = ({ plan }) => {
 
 export default function App() {
   const [selectedPessoas, setSelectedPessoas] = useState<number>(6);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   const selectedPlan = useMemo(() => 
     PLANOS.find(p => p.pessoas === selectedPessoas) || PLANOS[PLANOS.length - 1],
@@ -250,92 +247,91 @@ export default function App() {
 
   return (
     <div className="min-h-screen font-sans selection:bg-pool-blue/20 selection:text-deep-blue">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-pool-blue/10">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl font-serif font-black text-deep-blue uppercase tracking-tighter">
-              Lagoa <span className="italic text-pool-blue">Lovers</span>
-            </span>
-            <span className="hidden sm:block h-4 w-px bg-pool-blue/20 mx-2" />
-            <span className="hidden sm:block text-[10px] font-black uppercase tracking-[0.3em] text-pool-blue/60 mt-1">
-              Títulos Vitalícios
-            </span>
-          </div>
-
-          <nav className="hidden md:flex items-center gap-10">
-            {['WhatsApp'].map((item) => (
-              <a 
-                key={item} 
-                href={`https://wa.me/${WHATSAPP_NUMBER}`} 
-                className="text-xs font-black uppercase tracking-widest text-navy-dark/60 hover:text-pool-blue transition-colors"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {item}
-              </a>
-            ))}
-          </nav>
-
-          <button className="md:hidden text-deep-blue" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            <Menu size={24} />
-          </button>
+      {/* Header - Transparent & Integrated */}
+      <header className="absolute top-0 left-0 right-0 z-50 py-10 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center space-y-6">
+          <img 
+            src="https://i.postimg.cc/1RjH4j0M/logo-lagoa.png" 
+            alt="Lagoa Parques e Hotéis" 
+            className="mx-auto h-20 md:h-28 lg:h-32 w-auto object-contain" 
+          />
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="pt-40 pb-20 px-6 hero-wave overflow-hidden relative">
-        <div className="bubble w-20 h-20 top-20 left-[10%]" />
+      <section className="pt-56 md:pt-64 lg:pt-72 pb-24 px-6 hero-wave overflow-hidden relative">
+        {/* Subtle Aquatic Decorations */}
+        <div className="bubble w-20 h-20 top-40 left-[10%] opacity-20" />
         <div className="bubble w-32 h-32 bottom-20 right-[15%] opacity-10" />
         
-        <div className="max-w-4xl mx-auto text-center space-y-10 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="space-y-4"
-          >
-            <span className="text-xs font-black uppercase tracking-[0.4em] text-turquoise">Viva a Experiência Lagoa</span>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-black text-deep-blue leading-[1.1] tracking-tighter uppercase">
-              Adquira agora <br />
-              <span className="text-pool-blue italic">seu Lagoa Lovers</span>
-            </h1>
-            <p className="text-lg md:text-xl text-grey-text max-w-2xl mx-auto font-medium">
-              O título vitalício feito para você e sua família viverem momentos inesquecíveis com exclusividade e economia no coração do Lagoa.
-            </p>
-          </motion.div>
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid md:grid-cols-2 items-center gap-12 lg:gap-20">
+            {/* Left Column: Text Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="text-center md:text-left space-y-8"
+            >
+              <div className="space-y-4">
+                <span className="inline-block px-4 py-1.5 bg-pool-blue/10 text-pool-blue text-xs font-black uppercase tracking-[0.3em] rounded-full">
+                  Viva a Experiência Lagoa
+                </span>
+                <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black text-deep-blue leading-[1.05] tracking-tighter uppercase">
+                  Adquira agora <br />
+                  <span className="text-pool-blue italic">seu Lagoa Lovers</span>
+                </h1>
+                <p className="text-lg md:text-xl text-grey-text max-w-xl mx-auto md:mx-0 font-medium leading-relaxed">
+                  O título vitalício feito para você e sua família viverem momentos inesquecíveis com exclusividade e economia no coração do Lagoa.
+                </p>
+              </div>
 
-          <motion.button
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            onClick={scrollToSelector}
-            className="px-10 py-5 btn-primary rounded-2xl shadow-xl text-base uppercase tracking-widest font-black"
-          >
-            Escolher meu título
-          </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={scrollToSelector}
+                className="px-12 py-5 btn-primary rounded-2xl shadow-xl shadow-pool-blue/20 text-base uppercase tracking-widest font-black"
+              >
+                Escolher meu título
+              </motion.button>
+            </motion.div>
+
+            {/* Right Column: Characters Image */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
+              className="flex justify-center"
+            >
+              <img 
+                src="https://i.postimg.cc/9QKzss9F/Chat-GPT-Image-3-05-2026-01-58-44-(1).png" 
+                alt="Personagens Lagoa" 
+                className="w-full max-w-md md:max-w-lg lg:max-w-2xl object-contain drop-shadow-[0_40px_80px_rgba(0,174,239,0.25)]" 
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Selector Section */}
-      <section id="selector-section" className="py-20 px-6 bg-white border-t border-pool-blue/10">
-        <div className="max-w-7xl mx-auto space-y-16">
+      <section id="selector-section" className="py-24 px-6 bg-white border-t border-pool-blue/10">
+        <div className="max-w-7xl mx-auto space-y-20">
           <div className="text-center space-y-4">
-            <h2 className="text-3xl font-serif font-black text-deep-blue uppercase tracking-tight">
+            <h2 className="text-3xl md:text-4xl font-serif font-black text-deep-blue uppercase tracking-tight">
               Selecione o plano ideal
             </h2>
-            <p className="text-grey-text font-medium">Escolha a quantidade de pessoas para o seu título</p>
+            <p className="text-grey-text font-medium text-lg">Escolha a quantidade de pessoas para o seu título</p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-4">
             {[1, 2, 3, 4, 5, 6].map((num) => (
               <button
                 key={num}
                 onClick={() => setSelectedPessoas(num)}
                 className={`
-                  h-[52px] px-8 rounded-2xl text-[15px] font-black uppercase tracking-widest transition-all duration-300
+                  h-[56px] px-10 rounded-2xl text-[16px] font-black uppercase tracking-widest transition-all duration-300
                   ${selectedPessoas === num 
-                    ? 'bg-pool-blue text-white shadow-lg shadow-pool-blue/20 scale-105' 
-                    : 'bg-white border-2 border-pool-blue/10 text-pool-blue hover:border-pool-blue/30 hover:bg-ice-blue'}
+                    ? 'bg-pool-blue text-white shadow-xl shadow-pool-blue/30 scale-105' 
+                    : 'bg-white border-2 border-pool-blue/10 text-pool-blue hover:border-pool-blue/40 hover:bg-ice-blue'}
                 `}
               >
                 {num} {num === 1 ? 'Pessoa' : 'Pessoas'}
@@ -344,7 +340,7 @@ export default function App() {
           </div>
 
           {/* Main Card */}
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <AnimatePresence mode="wait">
               <PlanCard key={selectedPessoas} plan={selectedPlan} />
             </AnimatePresence>
@@ -392,9 +388,11 @@ export default function App() {
       <footer className="bg-navy-dark py-20 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12 font-bold uppercase tracking-widest text-center md:text-left">
           <div className="space-y-4">
-            <span className="text-3xl font-serif font-black text-white uppercase tracking-tighter">
-              Lagoa <span className="italic text-pool-blue">Lovers</span>
-            </span>
+            <img 
+              src="https://i.postimg.cc/1RjH4j0M/logo-lagoa.png" 
+              alt="Lagoa Parques e Hotéis" 
+              className="mx-auto md:mx-0 h-16 w-auto object-contain" 
+            />
             <p className="text-[10px] text-white/40 leading-relaxed max-w-xs">
               © 2026 Lagoa Lovers. Grupo Lagoa Parque & Hotéis. <br /> Rua Lagoa Quente, Caldas Novas, GO.
             </p>
