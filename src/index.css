@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  
+  --color-pool-blue: #00AEEF;
+  --color-turquoise: #00C2D1;
+  --color-deep-blue: #003B5C;
+  --color-petroleum: #005F73;
+  --color-water-green: #4ECDC4;
+  --color-gold: #F4C542;
+  --color-orange-soft: #FF8A3D;
+  --color-ice-blue: #EAFBFF;
+  --color-navy-dark: #062B3A;
+  --color-grey-text: #4B5563;
+}
+
+@layer base {
+  body {
+    @apply bg-ice-blue text-navy-dark antialiased;
+  }
+}
+
+.aquatic-gradient {
+  background: linear-gradient(135deg, #FFFFFF 0%, #EAFBFF 50%, #D1F4FF 100%);
+}
+
+.hero-wave {
+  background: linear-gradient(180deg, #FFFFFF 0%, rgba(0, 174, 239, 0.05) 100%);
+}
+
+.premium-card-light {
+  @apply bg-white border border-pool-blue/20 rounded-[32px] transition-all duration-500 overflow-hidden;
+  box-shadow: 0 20px 40px rgba(0, 59, 92, 0.05);
+}
+
+.premium-card-dark {
+  @apply bg-deep-blue text-white border border-turquoise/30 rounded-[32px] transition-all duration-500 overflow-hidden;
+  box-shadow: 0 30px 60px rgba(0, 59, 92, 0.2);
+}
+
+.btn-primary {
+  @apply bg-gradient-to-r from-pool-blue to-turquoise text-white font-bold transition-all hover:shadow-lg active:scale-95;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-pool-blue/20 rounded-full;
+}
+
+.bubble {
+  @apply absolute rounded-full bg-white/20 blur-[1px];
+  animation: float 10s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-20px) translateX(10px); }
+}
